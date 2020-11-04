@@ -2,8 +2,7 @@ pipeline {
   agent any
   stages {
     stage('Build') {
-      steps {
-        echo $(whoami)
+      steps {        
         sh './Build/startnodes.sh'
       }
     }
