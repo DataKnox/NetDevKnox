@@ -5,6 +5,11 @@ import argparse
 import getpass
 import json
 from pprint import pprint
+import logging
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+logging.basicConfig(level=logging.DEBUG,
+                    format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
 
 def api_login():
@@ -33,7 +38,7 @@ def query_api(url, time_stamp, cookie):
     }
     api_url = 'https://10.10.21.28/api/'
     full_url = api_url + url
-    print(full_url)
+    logging.info(f"URL:{full_url}")
     nodes = requests.get(url=full_url, headers=headers,
                          cookies=cookie, verify=False)
     response = nodes.json()
@@ -60,11 +65,13 @@ def main():
     print()
     cookie = api_login()
     if args.topo and args.start:
+        logging.info("Running EVE-NG nodes start")
         url = 'labs/{}/nodes'.format(args.topo)
         data = query_api(url, time_stamp, cookie)
-        print(json.dumps(data, indent=2))
+        #print(json.dumps(data, indent=2))
         data = data["data"]
         for key, value in data.items():
+            logging.info(f"Starting node {key}")
             url = 'labs/{}/nodes/{}/start'.format(args.topo, key)
             response = query_api(url, time_stamp, cookie)
             print(response)

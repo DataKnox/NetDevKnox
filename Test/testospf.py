@@ -20,22 +20,23 @@ headers = {'Accept': 'application/yang-data+json',
 
 def test_ospf():
     for ip in ip_address:
+        print(f"Starting with device {ip}")
+        logging.info(f"Starting with device {ip}")
         url = f"https://{ip}/restconf/data/Cisco-IOS-XE-ospf-oper:ospf-oper-data/ospf-state/ospf-instance"
-        print(url)
+
         routerid_resp = requests.get(
             url=url, auth=('cisco', 'cisco'), headers=headers, verify=False)
         logging.info(routerid_resp.status_code)
         logging.info(routerid_resp.text)
         router_id = json.loads(routerid_resp.text)[
             "Cisco-IOS-XE-ospf-oper:ospf-instance"][0]['router-id']
-        logging.info(router_id)
+        print(f"Retrieved router-id {router_id}")
         new_url = (
             f"{url}=address-family-ipv4,{router_id}/ospf-area=0/ospf-interface/")
         interfaces = requests.get(
             url=new_url, headers=headers, auth=('cisco', 'cisco'), verify=False).json()['Cisco-IOS-XE-ospf-oper:ospf-interface']
         ospf_state = False
         for interface in interfaces:
-            print(json.dumps(interface, indent=2))
             if 'ospf-neighbor' in interface:
                 nbrs = interface['ospf-neighbor']
                 for nbr in nbrs:
