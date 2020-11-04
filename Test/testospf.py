@@ -43,7 +43,7 @@ def test_ospf():
                         ospf_state = True
                         print(True)
         # print(new_url)
-        assert(ospf_state == True)
+        assert(ospf_state == False)
 
 
 test_ospf()
