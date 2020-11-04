@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        
+          sh "printenv | sort"
           sh './Build/startnodes.sh'
         
       }
