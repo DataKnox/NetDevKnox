@@ -10,10 +10,14 @@ pipeline {
     }
 
     stage('Test') {
-      steps {
-       
+      steps {       
           sh 'bash $WORKSPACE/Test/testscript.sh'
-        
+      }
+    }
+
+    stage('Deploy'){
+      steps{
+        sh 'bash $WORKSPACE/Deploy/deployer.sh'
       }
     }
 

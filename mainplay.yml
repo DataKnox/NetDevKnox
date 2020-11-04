@@ -1,16 +1,15 @@
 ---
     - name: Issue show commands
-      hosts: evetesters
+      hosts: nodes
       connection: local
       gather_facts: no
       tasks:
         - name: Create Loopback
           with_items: "{{local_loopback}}"
-          ios_interfaces:
-            config:
-              - name: "{{item.name}}"
-                enabled: True
-            state: merged
+          ios_interface:
+            name: "{{item.name}}"
+            enabled: True
+            state: present
     
         - name: Set Loopback IP
           with_items: "{{local_loopback}}"
@@ -26,11 +25,10 @@
     
         - name: No shut
           with_items: "{{interfaces}}"
-          ios_interfaces:
-            config:
-              - name: "{{item.name}}"
-                enabled: True
-            state: merged
+          ios_interface:
+            name: "{{item.name}}"
+            enabled: True
+            state: present
     
         - name: Enable OSPF
           ios_config:
