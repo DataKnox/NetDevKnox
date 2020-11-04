@@ -3,17 +3,17 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        script{
-          sh ./Build/startnodes.sh
-        }
+        
+          sh './Build/startnodes.sh'
+        
       }
     }
 
     stage('Test') {
       steps {
-        script {
-          sh ./Test/testscript.sh
-        }
+       
+          sh './Test/testscript.sh'
+        
       }
     }
 
