@@ -71,7 +71,7 @@ def main():
         #print(json.dumps(data, indent=2))
         data = data["data"]
         for key, value in data.items():
-            logging.info(f"Starting node {key}")
+            print(f"Starting node {key}")
             url = 'labs/{}/nodes/{}/start'.format(args.topo, key)
             response = query_api(url, time_stamp, cookie)
             print(response)
