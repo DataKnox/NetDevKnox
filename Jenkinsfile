@@ -3,13 +3,13 @@ pipeline {
   stages {
     stage('Build') {
       steps {        
-        sudo sh ./Build/startnodes.sh
+        sh ./Build/startnodes.sh
       }
     }
 
     stage('Test') {
       steps {
-        sudo sh ./Test/testscript.sh
+        sh ./Test/testscript.sh
       }
     }
 
