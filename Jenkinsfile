@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        whoami
+        echo $(whoami)
         sudo sh './Build/startnodes.sh'
       }
     }
