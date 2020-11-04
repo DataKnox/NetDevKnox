@@ -4,13 +4,13 @@ pipeline {
     stage('Build') {
       steps {
         echo $(whoami)
-        sudo sh './Build/startnodes.sh'
+        sh './Build/startnodes.sh'
       }
     }
 
     stage('Test') {
       steps {
-        sudo sh './Test/testscript.sh'
+        sh './Test/testscript.sh'
       }
     }
 
