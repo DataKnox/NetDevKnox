@@ -39,7 +39,7 @@
               - auto-cost reference-bandwidth 1000
             parents: router ospf 1
     
-        - name: Enable OSPF
+        - name: Enable OSPF Lo1
           ios_config:
             lines:          
               - int lo1
