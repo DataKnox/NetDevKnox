@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       steps {
           sh "printenv | sort"
-          sh './Build/startnodes.sh'
+          sh '$WORKSPACE/Build/startnodes.sh'
         
       }
     }
@@ -12,7 +12,7 @@ pipeline {
     stage('Test') {
       steps {
        
-          sh './Test/testscript.sh'
+          sh '$WORKSPACE/Test/testscript.sh'
         
       }
     }
