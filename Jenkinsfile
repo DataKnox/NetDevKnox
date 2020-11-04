@@ -2,14 +2,18 @@ pipeline {
   agent any
   stages {
     stage('Build') {
-      steps {        
-        sh ./Build/startnodes.sh
+      steps {
+        script{
+          sh ./Build/startnodes.sh
+        }
       }
     }
 
     stage('Test') {
       steps {
-        sh ./Test/testscript.sh
+        script {
+          sh ./Test/testscript.sh
+        }
       }
     }
 
