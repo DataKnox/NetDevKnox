@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.DEBUG,
 
 
 def api_login():
-    data = {"username": "admin", "password": "eve"}
+    data = {"username": "admin", "password": "eve", "html5": 0}
     url = 'https://10.10.21.28/api/auth/login'
     login = requests.post(url=url, data=json.dumps(data), verify=False)
     if login.status_code == 200:
@@ -119,12 +119,14 @@ def main():
             name = value["name"]
             device_type = value["type"]
             image = value["image"]
-            # url = value["url"].split(":")
+            # print(value["url"])
+            url = value["url"].split(":")
             # print(url)
-            # ip = url.replace("//", "")
-            # port = (url[2])
-            print('{} {} {} {}'.format(
-                key, name, device_type, image))
+            ip = url[1].replace("//", "")
+            # print(ip)
+            port = (url[2])
+            print('{} {} {} {} {} {}'.format(
+                key, name, device_type, image, ip, port))
         print()
     else:
         print("No options given. Use -h for help.")
